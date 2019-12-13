@@ -1,0 +1,74 @@
+
+  <mat-toolbar color="primary" class="navbar">
+    <div><img src="./assets/images/smedia.png" width = "50px" height="50px" /> S-Media </div>
+    <div>
+      <span><a id="homeScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/">Home</a></span>
+      <span ><a [ngClass]="{ 'active': activePage == 'profile' }"  routerLink="/profile">Profile</a></span>
+      <span ><a [ngClass]="{ 'active': activePage == 'addProduct' }"  routerLink="/addProduct">Sell Your Staff</a></span>
+      <span ><a [ngClass]="{ 'active': activePage == 'statistics' }"  routerLink="/statistics" >Statistics</a></span>
+      <span ><a [ngClass]="{ 'active': activePage == 'reports' }"  id="reportsScreen" routerLink="/reports" >Reports</a></span>
+      <span ><a [ngClass]="{ 'active': activePage == 'blocked' }"  id="blockedScreen" routerLink="/blocked" >Blocked Users</a></span>
+      <span ><a href="#"  (click)="logout()"> Logout </a></span>
+    </div>
+  </mat-toolbar>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
+       
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item avatar dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="badge badge-danger ml-2">4</span>
+              <i class="fas fa-bell"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
+              <a class="dropdown-item waves-effect waves-light" href="#">Action <span class="badge badge-danger ml-2">4</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="#">Another action <span class="badge badge-danger ml-2">1</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="#">Something else here <span class="badge badge-danger ml-2">4</span></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+  
+<main role="main" class="container">
+</main>
+<div id="loginModal" class="modal">
+
+  <div class="form">
+    <span (click)="closeModal()" class="close pull-right" style="margin-right:-40px;margin-top: -40px">&times;</span>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" *ngIf="loginShow" class="login-form">
+      <input id="name" name="name" formControlName="name" type="text" placeholder="Name"
+        [ngClass]="{ 'is-invalid': registerSubmitted && rf.name.errors }">
+      <div *ngIf="registerSubmitted && rf.name.errors" class="error-msg">
+        <div *ngIf="rf.name.errors.required">Name is required</div>
+      </div>
+      <input id="email" name="email" type="email" formControlName="email" placeholder="Email" 
+      [ngClass]="{ 'is-invalid': registerSubmitted &&rf.email.errors }">
+      <div *ngIf="registerSubmitted && rf.email.errors" class="error-msg">
+        <div *ngIf="rf.email.errors.required">Name is required</div>
+      </div>
+      <input id="password" name="password" type="password" formControlName="password" placeholder="password" 
+      [ngClass]="{ 'is-invalid': registerSubmitted && rf.password.errors }">
+      <div *ngIf="registerSubmitted && rf.password.errors" class="error-msg">
+        <div *ngIf="rf.password.errors.required">Name is required</div>
+      </div>
+      <input id="address" name="address" type="text" formControlName="address" placeholder="address" />
+      <input id="phone" name="phone" type="text" formControlName="phone" placeholder="phone number" />
+      <button type="submit">create</button>
+      <p class="message" (click)="toggle()">Already registered? <a>Sign In</a></p>
+    </form>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!loginShow" class="login-form">
+      <input id="email" name="email" type="text" formControlName="email" placeholder="Email" required
+        [ngClass]="{ 'is-invalid': loginSubmitted && lf.email.errors }" />
+      <div *ngIf="loginSubmitted && lf.email.errors" class="error-msg">
+        <div *ngIf="lf.email.errors.required">Name is required</div>
+      </div>
+      <input id="pass" name="password" type="password" formControlName="password" placeholder="password" required 
+      [ngClass]="{ 'is-invalid': loginSubmitted && lf.password.errors }">
+      <div *ngIf="loginSubmitted && lf.password.errors" class="error-msg">
+          <div *ngIf="lf.password.errors.required">Password is required</div>
+      </div>
+      <button>login</button>
+      <p class="message" (click)="toggle()">Not registered? <a>Create an account</a></p>
+    </form>
+  </div>
+</div>
