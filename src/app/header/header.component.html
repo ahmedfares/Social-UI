@@ -8,7 +8,17 @@
       <span ><a [ngClass]="{ 'active': activePage == 'statistics' }"  routerLink="/statistics" >Statistics</a></span>
       <span ><a [ngClass]="{ 'active': activePage == 'reports' }"  id="reportsScreen" routerLink="/reports" >Reports</a></span>
       <span ><a [ngClass]="{ 'active': activePage == 'blocked' }"  id="blockedScreen" routerLink="/blocked" >Blocked Users</a></span>
-      <span ><a href="#"  (click)="logout()"> Logout </a></span>
+      <span >
+          <span *ngIf="info.email">
+              <a href="#"  (click)="logout()"> Logout </a>
+          </span>
+          <span *ngIf="info.email">
+              <a href="#" > {{ info.email }} </a>
+          </span>
+          <span *ngIf="!info.email">
+              <a href="#" routerLink="/login"> login </a>
+          </span>
+        </span>
     </div>
   </mat-toolbar>
 

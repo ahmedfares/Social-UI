@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -32,13 +33,21 @@ export class HomeComponent implements OnInit {
   };
   currentProduct: any;
 
-  constructor(public apiService:ApiService,private router: Router) {
+  info: any;
+
+  constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) {
    }
   ngOnInit() {
     this.initializeLists();
     // this.getFilteredProducts();
     this.getAllPosts();
     this.getAllCategories();
+
+    this.info = {
+      token: this.token.getToken(),
+      email: this.token.getEmail(),
+      authorities: this.token.getAuthorities()
+    };
   }
 
   getAllCategories(){
@@ -168,4 +177,9 @@ filterByCat(type,event)
   // );
 
 }
+
+  logout() {
+    this.token.signOut();
+    window.location.reload();
+  }
 }
