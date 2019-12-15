@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegitserComponent } from './regitser/regitser.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { AuthGuard } from './auth/auth.guard';
+import { ManageRolesComponent } from './admin/manage-roles/manage-roles.component';
 
 const routes: Routes = [
   {
@@ -20,6 +23,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegitserComponent
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ADMIN'] }
+  },
+  {
+    path: 'admin/manage-roles',
+    component: ManageRolesComponent
   }
 ];
 
