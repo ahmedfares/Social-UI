@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SignUpInfo } from '../auth/signup-info';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regitser',
@@ -15,7 +16,7 @@ export class RegitserComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -37,6 +38,7 @@ export class RegitserComponent implements OnInit {
         console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
+        this.router.navigate(['/login']);
       }
     );
   }

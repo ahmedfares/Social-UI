@@ -53,7 +53,9 @@ export class ManageRolesComponent implements OnInit {
     this.roleService.addRole(role).subscribe(data => {
       alert("Role: "+ data.name+ " added successfully!")
       this.roles.push(data);
-    })
+    });
+    this.roleName = "";
+    this.selectedPrivileges = [];
   }
 
   loadPrivilegesList(){
@@ -69,7 +71,9 @@ export class ManageRolesComponent implements OnInit {
     }
     this.userService.assignRolesToUser(data).subscribe(data => {
       alert("Roles assigned to "+ data.name+" successfully!")
-    })
+    });
+    this.selectedUser = {};
+    this.selectedRoles = [];
   }
 
   loadRoles(){
