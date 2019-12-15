@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemPostComponent } from './item-post/item-post.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UsertimelineComponent } from './usertimeline/usertimeline.component';
+import { MalpostsComponent } from './malposts/malposts.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UsertimelineComponent } from './usertimeline/usertimeline.component';
     ItemPostComponent,
     FollowersComponent,
     UsertimelineComponent,
+    MalpostsComponent,
     
   ],
   imports: [

@@ -1,0 +1,19 @@
+<div class="container">
+  <app-header></app-header>
+  
+  <div style="display: flex;justify-content: center;padding-top: 100px;">
+    <mat-list style="width: 60%;">
+      
+      <h3 style="text-align: center;">Malicious Posts</h3>
+      <mat-list-item *ngFor="let post of posts" style="border:1px solid #CDCED1 ;">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h3 mat-line><a [routerLink]="['/userTimeLine',post.user.email]">{{post.user.firstName}} {{post.user.lastName}}</a></h3>
+        <h4 mat-line>{{post.body}} {{post.body}}</h4>
+        <button mat-flat-button color="primary" (click)="enablePost(post)" style="margin-right:10px;width:110px;background-color: green;">Enable</button>
+        <button mat-flat-button color="warn" (click)="disablePost(post)" style="width:110px">Disable</button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  
+</div>

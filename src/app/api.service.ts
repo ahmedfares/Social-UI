@@ -88,6 +88,11 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
+  getAllMalPosts(): Observable<any> {
+    return this.http.get(this.baseUrl + '/post/blockedPost/', {
+      responseType: 'json' as 'json'
+    });
+  }
   
   addNewFollower(userEmail,followerEmail): Observable<any> {
     let body = new FormData();
@@ -98,6 +103,20 @@ export class ApiService {
   deleteFollower(userEmail,followerEmail): Observable<any> {
     let body = new FormData();
     return this.http.post(this.baseUrl + '/user/DeleteFollowing/'+userEmail+'/'+followerEmail,body, {
+      responseType: 'json' as 'json'
+    });
+  }
+
+  enablePost(post): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/post/ignorePost?postId='+post.id,post.id, {
+      responseType: 'json' as 'json'
+    });
+  }
+
+  disablePost(post): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/post/deactivatePost?postId='+post.id,post.id, {
       responseType: 'json' as 'json'
     });
   }

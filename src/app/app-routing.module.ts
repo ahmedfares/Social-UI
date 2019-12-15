@@ -5,6 +5,7 @@ import { RegitserComponent } from './regitser/regitser.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UsertimelineComponent } from './usertimeline/usertimeline.component';
+import { MalpostsComponent } from './malposts/malposts.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,12 @@ const routes: Routes = [
   {
     path: 'userTimeLine/:email',
     component: UsertimelineComponent
+  },
+  {
+    path: 'malPosts',
+    component: MalpostsComponent
   }
+  
 ];
 
 @NgModule({
