@@ -1,0 +1,20 @@
+<div class="container">
+  <app-header></app-header>
+  
+  <div style="display: flex;justify-content: center;padding-top: 100px;">
+    <mat-list style="width: 40%;">
+      <div class="row" style="margin-bottom: 20px;"> 
+        <input id="followid" type="text" #followEmail placeholder="Add follower email" class="form-control col-md-8" style="margin-left: 20px;"/>
+        <button mat-flat-button color="primary" (click)="addFollower(followEmail.value)" style="width:110px;margin-left: 40px;">Follow</button>
+      </div>  
+      <h3 mat-subheader>Followers</h3>
+      <mat-list-item *ngFor="let follower of followers" style="border:1px solid #CDCED1 ;">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line><a [routerLink]="['/userTimeLine',follower.email]">{{follower.firstName}} {{follower.lastName}}</a> </h4>
+        <button mat-flat-button color="warn" (click)="removeFollower(follower)" style="width:110px">Un Follow</button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  
+</div>

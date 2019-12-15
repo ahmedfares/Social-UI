@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ManageRolesComponent } from './admin/manage-roles/manage-roles.component';
+import { FollowersComponent } from './followers/followers.component';
+import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
   {
     path: 'admin/manage-roles',
     component: ManageRolesComponent
+  },
+  {
+    path: 'followers',
+    component: FollowersComponent
+  },
+  {
+    path: 'userTimeLine/:email',
+    component: UsertimelineComponent
   }
 ];
 

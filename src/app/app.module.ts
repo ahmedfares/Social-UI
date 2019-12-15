@@ -18,6 +18,9 @@ import { UserComponent } from './user/user.component';
 import { ManageRolesComponent } from './admin/manage-roles/manage-roles.component';
 import { MatInputModule, MatFormFieldModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ItemPostComponent } from './item-post/item-post.component';
+import { FollowersComponent } from './followers/followers.component';
+import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     RegitserComponent,
     HeaderComponent,
     UserComponent,
-    ManageRolesComponent
+    ManageRolesComponent,
+    ItemPostComponent,
+    FollowersComponent,
+    UsertimelineComponent,
     
   ],
   imports: [

@@ -9,7 +9,7 @@ export class ApiService {
 
 
   ip = "http://localhost";
-  baseUrl = this.ip + ":8085";
+  baseUrl = this.ip + ":8080";
 
   constructor(private http: HttpClient) { }
 
@@ -34,173 +34,71 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-  getAllPost(): Observable<any> {
-    return this.http.get(this.baseUrl + '/Allposts', {
-      responseType: 'json' as 'json'
-    });
-  }
-
-  bid(product): Observable<any> {
-    let token = localStorage.getItem("token");
-
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'responseType': 'json' as 'json'
-    });
-
-    let options = { headers: headers };
-
-    return this.http.post(this.baseUrl + '/api/bidding/bid', product, options);
-  }
-
-  reportUser(msg: string, reported) {
-    //TODO fixme
-    reported = { id: 1 };
-    // let token = localStorage.getItem("token") || "";
-
-    // let headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Authorization': token });
-
-    // let options = { responseType: 'json' as 'json',
-    // headers: headers };
-
+  getAllPost(email,pageNo): Observable<any> {
     let body = new FormData();
-    body.append("msg", msg);
-    body.append("reported", new Blob([JSON.stringify(reported)],
-      {
-        type: "application/json"
-      }
-    ));
-
-    return this.http.post(this.baseUrl + '/reportUser', body);
-  }
-  getPostById(id): Observable<any> {
-
-    return this.http.get(this.baseUrl + '/posts/' + id, { responseType: 'json' as 'json' });
-
-
-  }
-  // getProfileData(token):Observable<any>
-  // {
-  // let header = new HttpHeaders();
-  // header.append('Authorization',token)
-  // return this.http.get(this.baseUrl+'/profileData',header,   {
-  //   responseType: 'json' as 'json'
-  // });
-
-  // }
-  getProfileData(): Observable<any> {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    let headers = new HttpHeaders({
-      'Authorization': token
+    body.append('email', email);
+    return this.http.post(this.baseUrl + '/post/allPosts/'+pageNo,email, {
+      responseType: 'json' as 'json'
     });
-    const options = { responseType: 'json' as 'json', headers };
-    return this.http.get(this.baseUrl + '/profileData', options);
-
   }
-  setProfileData(person): Observable<any> {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    let headers = new HttpHeaders({
-      'Authorization': token
-    });
-    const options = { responseType: 'json' as 'json', headers };
-    return this.http.post(this.baseUrl + '/updateProfile', person, options);
-
-  }
-
-
-  ignoreReports(userId): Observable<any> {
+  searchAllPosts(email,pageNo,searchTxt): Observable<any> {
     let body = new FormData();
-    body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/ignoreReports', body, {
+    body.append('email', email);
+    return this.http.post(this.baseUrl + '/post/searchAllPosts/'+pageNo+'/'+searchTxt,email, {
       responseType: 'json' as 'json'
     });
   }
-
-  blockUser(userId): Observable<any> {
+  getUserPost(email,pageNo): Observable<any> {
     let body = new FormData();
-    body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/blockUser', body, {
+    body.append('email', email);
+    return this.http.post(this.baseUrl + '/post/userPosts/'+pageNo,email, {
       responseType: 'json' as 'json'
     });
   }
-  activate(userId): Observable<any> {
+  searchUserPosts(email,pageNo,searchTxt): Observable<any> {
     let body = new FormData();
-    body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/activate', body, {
+    body.append('email', email);
+    return this.http.post(this.baseUrl + '/post/searchUserPosts/'+pageNo+'/'+searchTxt,email, {
       responseType: 'json' as 'json'
     });
   }
-
-  getAllCategories(): Observable<any> {
-    return this.http.get(this.baseUrl + '/getAllCategories', {
-      responseType: 'json' as 'json'
-    });
-  }
-
-  getAllReports(): Observable<any> {
-    return this.http.get(this.baseUrl + '/reports', {
-      responseType: 'json' as 'json'
-    });
-  }
-  loadBlockedUsers(): Observable<any> {
-    return this.http.get(this.baseUrl + '/blocked', {
-      responseType: 'json' as 'json'
-    });
-  }
-
-  savePost(post, images): Observable<any> {
-    const token = localStorage.getItem('token');
-    let headers = new HttpHeaders({
-      'Authorization': token
-    });
-    const options = { responseType: 'text' as 'json', headers };
+  addComment(postId,comment): Observable<any> {
     let body = new FormData();
-    for (let image of images) {
-      body.append('images', image);
-    }
-    body.append("post", new Blob([JSON.stringify(post)],
-      {
-        type: "application/json"
-      }));
-    return this.http.post(this.baseUrl + '/addPost', body, options);
-  }
-  updatePost(post, images): Observable<any> {
-    const token = localStorage.getItem('token');
-    let headers = new HttpHeaders({
-      'Authorization': token
-    });
-    const options = { responseType: 'text' as 'json', headers };
-    let body = new FormData();
-    if (images != null) {
-      for (let image of images) {
-        body.append('images', image);
-      }
-    } else {
-      body.append('images', null);
-    }
-    body.append("post", new Blob([JSON.stringify(post)],
-      {
-        type: "application/json"
-      }));
-    return this.http.post(this.baseUrl + '/updatePost', body, options);
-  }
-
-  adminStatistics(): Observable<any> {
-    return this.http.get(this.baseUrl + '/admin/stat', {
+    return this.http.post(this.baseUrl + '/post/addComment/'+postId+'/'+comment,body, {
       responseType: 'json' as 'json'
     });
   }
-  getUserNotifications(): Observable<any> {
-    const token = localStorage.getItem('token');
-    let headers = new HttpHeaders({
-      'Authorization': token
+  addLike(postId): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/post/addLike/'+postId,body, {
+      responseType: 'json' as 'json'
     });
-    const options = { responseType: 'json' as 'json', headers };
-    return this.http.get(this.baseUrl + '/getNotifications', options);
+  }
+  removeLike(postId): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/post/removeLike/'+postId,body, {
+      responseType: 'json' as 'json'
+    });
+  }
+  
+  getAllFollowers(email): Observable<any> {
+    let body = new FormData();
+    body.append('email', email);
+    return this.http.post(this.baseUrl + '/user/GetFollowings/',email, {
+      responseType: 'json' as 'json'
+    });
+  }
+  
+  addNewFollower(userEmail,followerEmail): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/user/AddFollowing/'+userEmail+'/'+followerEmail,body, {
+      responseType: 'json' as 'json'
+    });
+  }
+  deleteFollower(userEmail,followerEmail): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/user/DeleteFollowing/'+userEmail+'/'+followerEmail,body, {
+      responseType: 'json' as 'json'
+    });
   }
 }
