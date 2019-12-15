@@ -1,0 +1,34 @@
+mat-card {
+    margin: 20px;
+}
+.example-card {
+    text-align: center;
+  }
+  
+  .example-header-image {
+    background-image: url('../../assets/images/userLogo.jpg');
+    background-size: cover;
+  }
+  .example-card[_ngcontent-lwl-c3]{
+    text-align: left !important;
+  }
+  p {
+      text-align: left;
+  }
+  mat-card-title {
+    color: #385898;
+  }
+  .liked {
+    color: #385898;
+    font-weight: 900;
+  }
+  .commented {
+    color: #385898;
+    font-weight: 900;
+  }
+  .normalBtn 
+  {
+    width: 45%; margin: 10px;
+  }
+  .normal
+  {color: #F2F3F5;}

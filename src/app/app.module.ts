@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ItemPostComponent } from './item-post/item-post.component';
+import { FollowersComponent } from './followers/followers.component';
+import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegitserComponent,
     HeaderComponent,
+    ItemPostComponent,
+    FollowersComponent,
+    UsertimelineComponent,
     
   ],
   imports: [

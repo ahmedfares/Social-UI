@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegitserComponent } from './regitser/regitser.component';
 import { LoginComponent } from './login/login.component';
+import { FollowersComponent } from './followers/followers.component';
+import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegitserComponent
+  },
+  {
+    path: 'followers',
+    component: FollowersComponent
+  },
+  {
+    path: 'userTimeLine/:email',
+    component: UsertimelineComponent
   }
 ];
 

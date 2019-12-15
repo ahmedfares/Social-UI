@@ -12,7 +12,7 @@
   <div class="row" style="background-color: #E9EBEE;">
     <div class="col-md-3"></div>
     <div class="col-md-6" style="text-align: center;margin-top: 70px;">
-      <div  *ngFor="let product of AllPosts; let i = index" style="margin-top: 20px;">
+      <div  *ngFor="let product of UserPosts; let i = index" style="margin-top: 20px;">
       <app-item-post [product]="product"></app-item-post>
     </div>
     <button mat-button color="primary" (click)="loadMorePosts()" >Load More Posts</button>

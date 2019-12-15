@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
   checkUserExist(){
     if(localStorage.getItem('userData')){
         this.appUser = JSON.parse(localStorage.getItem('userData'));
-        this.getUserNotifications();
+        //this.getUserNotifications();
       }
   }
 
@@ -151,10 +151,10 @@ export class HeaderComponent implements OnInit {
   }
 
   getUserNotifications(){
-    this.apiService.getUserNotifications().subscribe(data => {
-      console.log('>> user notifications: ',data);
-      this.notifications = data;
-    });
+    // this.apiService.getUserNotifications().subscribe(data => {
+    //   console.log('>> user notifications: ',data);
+    //   this.notifications = data;
+    // });
   }
 
 }
