@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .container {
     background-color: #E9EBEE;
     width: 100%;
@@ -5,6 +9,7 @@
     margin: 0px;
     max-width: none;
     padding: 0px;
+    overflow: hidden;
   }
 
 mat-card {
@@ -45,6 +50,7 @@ mat-card {
     justify-content: center;
     display: flex;
     margin: 20px;
+    padding-top: 50px;
   }
 
   .matInput
