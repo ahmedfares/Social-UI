@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-followers',
@@ -11,7 +12,7 @@ export class FollowersComponent implements OnInit {
 
   @ViewChild('followEmail') followEmail: ElementRef;
   followers:any[] = [];
-  constructor(public apiService:ApiService,private router: Router) { }
+  constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) { }
 
   ngOnInit() {
     this.getAllFollowers();
@@ -21,7 +22,7 @@ export class FollowersComponent implements OnInit {
     this.addNewFollower(text);
   }
   addNewFollower(followerEmail){
-    this.apiService.addNewFollower("ahmed@gmail.com",followerEmail).subscribe(data => {
+    this.apiService.addNewFollower(this.token.getEmail(),followerEmail).subscribe(data => {
       if (data != null)
         this.followers.push(data);
       else
@@ -30,12 +31,12 @@ export class FollowersComponent implements OnInit {
     });
   }
   removeFollower(user){
-    this.apiService.deleteFollower("ahmed@gmail.com",user.email).subscribe(data => {
+    this.apiService.deleteFollower(this.token.getEmail(),user.email).subscribe(data => {
       this.followers.splice(this.followers.indexOf(user),1);
     });
   }
   getAllFollowers(){
-    this.apiService.getAllFollowers("ahmed@gmail.com").subscribe(data => {
+    this.apiService.getAllFollowers(this.token.getEmail()).subscribe(data => {
       this.followers= data;
     });
   }

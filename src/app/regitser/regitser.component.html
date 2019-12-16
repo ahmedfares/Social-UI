@@ -1,29 +1,55 @@
 <div class="container">
+
+    <div *ngIf="isSignedUp; else signupForm">
+      Your registration is successful. Please login!
+    </div>
+  
+    <ng-template #signupForm>
   <div class="loginContainer">
     <h2>S-Media</h2>
     <mat-card>
-      <form class="example-form">
-        <mat-form-field class="example-half-left-width">
-          <input matInput placeholder="First Name">
-        </mat-form-field>
-        <mat-form-field class="example-half-right-width">
-          <input matInput placeholder="Last Name">
+      <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Full name"  name="name" [(ngModel)]="form.name" #name="ngModel" required >
+              <div *ngIf="f.submitted && name.invalid">
+                <div *ngIf="name.errors.required">Name is required</div>
+              </div>
+            </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" name="email" [(ngModel)]="form.email" #email="ngModel" required email>
+          <div *ngIf="f.submitted && email.invalid">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            </div>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Email">
+          <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="form.password" #password required minlength="6" >
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Phone Number">
-        </mat-form-field>
-        <mat-form-field class="example-half-left-width">
-          <input matInput placeholder="Age">
-        </mat-form-field>
-        <mat-form-field class="example-half-right-width">
-          <input matInput placeholder="City">
-        </mat-form-field>
+            <input matInput placeholder="Mobile" type="text" name="phoneNumber" [(ngModel)]="form.phoneNumber" #phoneNumber required maxlength="15" >
+            <div *ngIf="f.submitted && phoneNumber.invalid">
+              <div *ngIf="phoneNumber.errors.required">Mobile is required</div>
+              <div *ngIf="phoneNumber.errors.maxlength">Please enter a valid phone number</div>
+            </div>
+            
+          </mat-form-field>
+          <mat-form-field class="example-half-left-width">
+              <input matInput placeholder="Age" type="number" name="age" [(ngModel)]="form.age" #age required maxlength="3" >
+              <div *ngIf="f.submitted && age.invalid">
+                <div *ngIf="age.errors.required">Age is required</div>
+                <div *ngIf="age.errors.maxlength">Please enter your real age</div>
+              </div>
+            </mat-form-field>
+            <mat-form-field class="example-half-right-width">
+                <input matInput placeholder="City" type="text" name="city" [(ngModel)]="form.city" #city required >
+                <div *ngIf="f.submitted && city.invalid">
+                  <div *ngIf="city.errors.required">City is required</div>
+                </div>
+              </mat-form-field>
 
         
         <button mat-flat-button color="primary" class="btnLogin">Sign Up</button>
@@ -32,4 +58,5 @@
       </form>
     </mat-card>
   </div>
+  </ng-template>
 </div>

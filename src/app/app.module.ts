@@ -11,13 +11,18 @@ import { HeaderComponent } from './header/header.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserComponent } from './user/user.component';
+import { ManageRolesComponent } from './admin/manage-roles/manage-roles.component';
+import { MatInputModule, MatFormFieldModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import { ItemPostComponent } from './item-post/item-post.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 import { MalpostsComponent } from './malposts/malposts.component';
+import { ClaimsComponent } from './claims/claims.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +31,13 @@ import { MalpostsComponent } from './malposts/malposts.component';
     LoginComponent,
     RegitserComponent,
     HeaderComponent,
+    UserComponent,
+    ManageRolesComponent,
     ItemPostComponent,
     FollowersComponent,
     UsertimelineComponent,
     MalpostsComponent,
+    ClaimsComponent,
     
   ],
   imports: [
@@ -41,10 +49,20 @@ import { MalpostsComponent } from './malposts/malposts.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialsModule
+    MaterialsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatAutocompleteModule
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

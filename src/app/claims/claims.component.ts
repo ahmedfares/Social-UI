@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
-  selector: 'app-malposts',
-  templateUrl: './malposts.component.html',
-  styleUrls: ['./malposts.component.scss']
+  selector: 'app-claims',
+  templateUrl: './claims.component.html',
+  styleUrls: ['./claims.component.scss']
 })
-export class MalpostsComponent implements OnInit {
-
+export class ClaimsComponent implements OnInit {
   @ViewChild('followEmail') followEmail: ElementRef;
   posts:any[] = [];
   constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) { }

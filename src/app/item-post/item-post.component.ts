@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ApiService } from '../api.service';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-item-post',
@@ -9,10 +10,10 @@ import { ApiService } from '../api.service';
 export class ItemPostComponent implements OnInit {
 
   @Input('product') product: any;
-    constructor(public apiService:ApiService,) { }
+    constructor(public apiService:ApiService, private token: TokenStorageService) { }
 
   ngOnInit() {
-    this.product.isLiked = this.product.likes.find(x=>x.user.email == "ahmed@gmail.com"); 
+    this.product.isLiked = this.product.likes.find(x=>x.user.email == this.token.getEmail()); 
   }
 
   likePost() {

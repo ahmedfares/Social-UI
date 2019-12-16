@@ -10,7 +10,7 @@
       <h3 mat-subheader>Followers</h3>
       <mat-list-item *ngFor="let follower of followers" style="border:1px solid #CDCED1 ;">
         <mat-icon mat-list-icon>person</mat-icon>
-        <h4 mat-line><a [routerLink]="['/userTimeLine',follower.email]">{{follower.firstName}} {{follower.lastName}}</a> </h4>
+        <h4 mat-line><a [routerLink]="['/userTimeLine',follower.email]">{{follower.name}}</a> </h4>
         <button mat-flat-button color="warn" (click)="removeFollower(follower)" style="width:110px">Un Follow</button>
         <mat-divider></mat-divider>
       </mat-list-item>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 
 @Component({
@@ -23,8 +24,9 @@ export class HeaderComponent implements OnInit {
   notifications=[];
   activePage;
   
+  info: any;
   constructor(
-    private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
+    private router: Router, private apiService: ApiService, private formBuilder: FormBuilder, private token: TokenStorageService) {
     this.loginShow = false;
   }
 
@@ -44,6 +46,12 @@ export class HeaderComponent implements OnInit {
     this.createLoginForm();
     this.createRegister();
     this.checkUserExist();
+
+    this.info = {
+      token: this.token.getToken(),
+      email: this.token.getEmail(),
+      authorities: this.token.getAuthorities()
+    };
   }
 
   
@@ -139,15 +147,19 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.loginShow = !this.loginShow;
   }
-  logout() { 
-    this.appUser = null; 
-    console.log('>>>> logout')
-    localStorage.removeItem('token');
-    localStorage.removeItem('type');
-    localStorage.removeItem('name');
-    localStorage.removeItem('userDate');
-    this.router.navigate(['/login']);
-    //this.auth.logout();
+  // logout() { 
+  //   this.appUser = null; 
+  //   console.log('>>>> logout')
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('type');
+  //   localStorage.removeItem('name');
+  //   localStorage.removeItem('userDate');
+  //   this.router.navigate(['/login']);
+  //   //this.auth.logout();
+  // }
+  logout() {
+    this.token.signOut();
+    window.location.reload();
   }
 
   getUserNotifications(){
