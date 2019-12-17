@@ -80,7 +80,18 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-  
+
+  addClaim(user,msg): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/user/addClaim/'+msg,user, {
+      responseType: 'json' as 'json'
+    });
+  }
+  getAllClaims(): Observable<any> {
+    return this.http.get(this.baseUrl + '/ClaimList', {
+      responseType: 'json' as 'json'
+    });
+  }
   getAllFollowers(email): Observable<any> {
     let body = new FormData();
     body.append('email', email);
@@ -112,6 +123,16 @@ export class ApiService {
     return this.http.post(this.baseUrl + '/post/ignorePost?postId='+post.id,post.id, {
       responseType: 'json' as 'json'
     });
+  }
+  activateUser(post): Observable<any> {
+    let body = new FormData();
+    return this.http.post(this.baseUrl + '/activateClaim?userId='+post.user.id,post.user.id, {
+      responseType: 'json' as 'json'
+    });
+  }
+  ignoreUser(post): Observable<any> {
+    let body = new FormData();
+    return this.http.delete(this.baseUrl + '/ignoreClaim?userId='+post.user.id,post.user.id);
   }
 
   disablePost(post): Observable<any> {

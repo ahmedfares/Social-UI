@@ -59,8 +59,9 @@ export class HomeComponent implements OnInit {
   viewClaim() {
     this.claimVisible = !this.claimVisible;
   }
-  addClaim() {
-    alert(this.claimTxt);
-    this.claimVisible = !this.claimVisible;
+  addClaim(claimTxt) {
+    this.apiService.addClaim(JSON.parse(this.token.getCurrentUser()),claimTxt).subscribe(data => {
+      this.claimVisible = !this.claimVisible;
+    });
   }
 }
