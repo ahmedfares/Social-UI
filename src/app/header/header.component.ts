@@ -13,6 +13,7 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class HeaderComponent implements OnInit {
   appUser: any;
+  isBlockedUser: boolean;
   user: any = {
   };
   loginShow;
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isBlockedUser = JSON.parse(this.token.getCurrentUser()).blocked;
     if (this.router.url == '/profile')
       this.activePage = 'profile';
     else if (this.router.url == '/statistics')

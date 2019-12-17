@@ -10,7 +10,10 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class HomeComponent implements OnInit {
 
+  claimVisible:boolean = false;
+  isBlockedUser:boolean;
   AllPosts: any[] = [];
+  claimTxt = "sdsa";
   pageNo = 0;
   constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) {
 
@@ -28,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPosts();
+    this.isBlockedUser = JSON.parse(this.token.getCurrentUser()).blocked;
   }
 
   searchAllPosts(searchTxt){
@@ -47,5 +51,16 @@ export class HomeComponent implements OnInit {
       this.AllPosts= data;
     });
   }
-  
+
+  logout() {
+    this.token.signOut();
+    this.router.navigate(['/login']);
+  }
+  viewClaim() {
+    this.claimVisible = !this.claimVisible;
+  }
+  addClaim() {
+    alert(this.claimTxt);
+    this.claimVisible = !this.claimVisible;
+  }
 }

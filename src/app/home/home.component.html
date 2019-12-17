@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!isBlockedUser"  class="container">
   <app-header></app-header>
   <div style="justify-content: center;display: flex">
       <input type="text" #searchTxt placeholder="Search" class="form-control searchField" (keyup)="enterSearchTxt($event,searchTxt.value)"/>
@@ -19,4 +19,21 @@
 
   </div>
   </div>
+</div>
+<div *ngIf="isBlockedUser" style="background-color: burlywood;display: flex;justify-content: center;align-items: center;flex: 1;" class="container">
+
+  <div style="text-align: center;">
+
+    <h1 style="color: crimson;"> You have exceeded your limit of Malicious Posts .. And The system automatically blocked you </h1>
+    <button *ngIf="!claimVisible" mat-flat-button color="warn" (click)="viewClaim()" >Claim</button>
+    <button *ngIf="!claimVisible" mat-flat-button color="primary" (click)="logout()" style="margin-left: 10px;" >Logout</button>
+    <div style="text-align: center;display: flex;justify-content: center;" *ngIf="claimVisible">
+      <textarea class="form-control" #claimTxt placeholder="Enter your claim" rows="8" id="claim" style="background-color: #F2F3F5;width: 500px;margin-left:50px ;"></textarea>
+    </div>
+    <div style="text-align: center;display: flex;justify-content: center;" *ngIf="claimVisible">
+      <button style="margin-top: 10px;" mat-flat-button color="primary" (click)="addClaim()" >Add Your Claim</button>
+    </div>
+  
+  </div>
+  
 </div>

@@ -23,6 +23,8 @@ import { FollowersComponent } from './followers/followers.component';
 import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 import { MalpostsComponent } from './malposts/malposts.component';
 import { ClaimsComponent } from './claims/claims.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { CreateAdvertisementComponent } from './create-advertisement/create-advertisement.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ClaimsComponent } from './claims/claims.component';
     UsertimelineComponent,
     MalpostsComponent,
     ClaimsComponent,
+    CreatePostComponent,
+    CreateAdvertisementComponent,
     
   ],
   imports: [
