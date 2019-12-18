@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdService } from './ad.service';
+import { AdService } from './services/ad.service';
 
 describe('AdService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

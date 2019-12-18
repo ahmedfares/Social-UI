@@ -1,0 +1,39 @@
+input{
+    border-radius: 0;
+    border: solid 2px #dd0031;
+}
+
+.form-control:focus{
+    border: solid 4px #dd0031;
+}
+.between{
+    margin:10px;
+}
+.forgot{
+    text-align: center;
+    font-weight: bold;
+    color:grey;
+    font-size: 0.9em;
+}
+.btn{
+cursor: pointer;
+}
+.card{
+    border-color: #dd0031;
+}
+button{
+    margin: 2px;
+    border: solid 3px;
+    font-weight: bold;
+}
+.checkbox-inline{
+    margin: 2px;
+    border: solid 3px;
+    font-weight: bold;
+}
+.tags{
+    margin: 3px;
+    padding: 8px;
+    border-radius: 3px;
+    text-align: center;
+}

@@ -11,6 +11,7 @@ import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 import { MalpostsComponent } from './malposts/malposts.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'post',
     component: CreatePostComponent
+  },
+  {
+    path:'adv',
+    component: AdvertisementComponent
   }
   
 ];
