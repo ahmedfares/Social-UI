@@ -10,6 +10,7 @@ import { FollowersComponent } from './followers/followers.component';
 import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 import { MalpostsComponent } from './malposts/malposts.component';
 import { ClaimsComponent } from './claims/claims.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'claims',
     component: ClaimsComponent
+  },
+  {
+    path: 'post',
+    component: CreatePostComponent
   }
   
 ];
