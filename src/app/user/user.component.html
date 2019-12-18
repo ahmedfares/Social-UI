@@ -2,12 +2,15 @@
 <div class="container upperprofile">
 
   <p class="profiletext">Profile</p>
-      <div class="row">
+      <div class="row" >
   
-        <div class="col-md-4 center">
+        <div class="col-md-4 center" *ngIf="showUpdate">
   
                 <img src="{{parent.user.imageURL}}" height="200" width="200">
   
+        </div>
+        <div class="col-md-4 center" *ngIf="!showUpdate">
+            <input type="file" (change) = "onFileSelected($event)">
         </div>
       <div  class="col-md-8 center">
         <div class="row">

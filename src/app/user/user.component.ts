@@ -10,6 +10,7 @@ export class UserComponent implements OnInit {
 
   categories: any;
   showUpdate: boolean = true;
+  selectedFile: any;
   user: any;
   update() {
     this.showUpdate = !this.showUpdate;
@@ -21,6 +22,8 @@ export class UserComponent implements OnInit {
     this.user.name = name;
     this.user.email = email;
     this.user.password = password;
+    if(this.selectedFile != null)
+      this.user.image = this.selectedFile;
     this.updateUserData();
   }
   constructor(private userService: UserService) { }
@@ -46,6 +49,9 @@ export class UserComponent implements OnInit {
     );
   }
 
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0];
+  }
   updateUserData() {
     console.log('update user data: ', this.user);
     this.userService.updateUserData(this.user).subscribe(

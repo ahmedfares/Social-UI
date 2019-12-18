@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
-import { getDefaultService } from 'selenium-webdriver/chrome';
 
 @Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  selector: 'app-advertisement',
+  templateUrl: './advertisement.component.html',
+  styleUrls: ['./advertisement.component.scss']
 })
-export class CreatePostComponent implements OnInit {
+export class AdvertisementComponent implements OnInit {
 
-  constructor(private userService : UserService, private postService:PostService, private router:Router) { }
+  constructor(private userService : UserService, private adService:AdService, private router:Router) { }
  
   PostText:string
   post: any ={};
@@ -55,5 +53,5 @@ export class CreatePostComponent implements OnInit {
   ngOnInit() {
     
   }
-  
+
 }
