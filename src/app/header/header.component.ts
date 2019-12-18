@@ -72,6 +72,7 @@ window.onclick = function(event) {
     this.info = {
       token: this.token.getToken(),
       email: this.token.getEmail(),
+      user: JSON.parse(this.token.getCurrentUser()),
       authorities: this.token.getAuthorities()
     };
   }
