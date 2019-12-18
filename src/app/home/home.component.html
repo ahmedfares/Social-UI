@@ -27,11 +27,9 @@
     <h1 style="color: crimson;"> You have exceeded your limit of Malicious Posts .. And The system automatically blocked you </h1>
     <button *ngIf="!claimVisible" mat-flat-button color="warn" (click)="viewClaim()" >Claim</button>
     <button *ngIf="!claimVisible" mat-flat-button color="primary" (click)="logout()" style="margin-left: 10px;" >Logout</button>
-    <div style="text-align: center;display: flex;justify-content: center;" *ngIf="claimVisible">
-      <textarea class="form-control" #claimTxt placeholder="Enter your claim" rows="8" id="claim" style="background-color: #F2F3F5;width: 500px;margin-left:50px ;"></textarea>
-    </div>
-    <div style="text-align: center;display: flex;justify-content: center;" *ngIf="claimVisible">
-      <button style="margin-top: 10px;" mat-flat-button color="primary" (click)="addClaim()" >Add Your Claim</button>
+    <div *ngIf="claimVisible">
+      <textarea class="form-control" #claimTxt placeholder="Enter your claim" rows="6" id="claim" style="background-color: #F2F3F5;width: 500px;margin-left:430px ;"></textarea><br>
+      <button style="margin-top: 10px;" mat-flat-button color="primary" (click)="addClaim(claimTxt.value)" >Add Your Claim</button>
     </div>
   
   </div>

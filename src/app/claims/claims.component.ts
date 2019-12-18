@@ -14,7 +14,7 @@ export class ClaimsComponent implements OnInit {
   constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) { }
 
   ngOnInit() {
-    this.getAllMalPosts();
+    this.getAllClaims();
   }
   addFollower(text)
   {
@@ -34,21 +34,21 @@ export class ClaimsComponent implements OnInit {
       this.posts.splice(this.posts.indexOf(user),1);
     });
   }
-  getAllMalPosts(){
-    this.apiService.getAllMalPosts().subscribe(data => {
+  getAllClaims(){
+    this.apiService.getAllClaims().subscribe(data => {
       this.posts= data;
       console.log(data);
     });
   }
 
-  enablePost(post){
-    this.apiService.enablePost(post).subscribe(data => {
+  activate(post){
+    this.apiService.activateUser(post).subscribe(data => {
       this.posts.splice(this.posts.indexOf(post),1);
       console.log(data);
     });
   }
-  disablePost(post){
-    this.apiService.disablePost(post).subscribe(data => {
+  ignore(post){
+    this.apiService.ignoreUser(post).subscribe(data => {
       this.posts.splice(this.posts.indexOf(post),1);
       console.log(data);
     });
