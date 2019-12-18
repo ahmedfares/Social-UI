@@ -21,6 +21,6 @@ export class SignUpInfo {
         this.age = age;
         this.city = city;
         this.password = password;
-        this.role = ['user'];
+        this.role = ['basic_user'];
     }
 }
