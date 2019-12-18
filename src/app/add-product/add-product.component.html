@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class=" container" style="padding-top: 6%;">
+  <div class="row">
+    <div class="col-md-6" *ngIf="postForm != null">
+      <form [formGroup]="postForm" (ngSubmit)="savePost()">
+
+        <div class="form-group custom-file mb-3">
+          <input type="file" (change)="uploadFile($event)" formControlName="photos" class="custom-file-input"
+            id="customFile" name="filename" [ngClass]="{ 'is-invalid': submitted && postForm.controls.photos.errors }">
+          <div *ngIf="submitted && postForm.controls.photos.errors" class="error-msg">
+            <div *ngIf="postForm.controls.photos.errors.required">Name is required</div>
+          </div>
+          <label class="custom-file-label" for="customFile">{{uploadedText}}</label>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Body</label>
+          <input name="title" formControlName="title" id="title" type="text" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.title.errors }">
+          <div *ngIf="submitted && postForm.controls.title.errors" class="error-msg">
+            <div *ngIf="postForm.controls.title.errors.required">Name is required</div>
+          </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary pull-right" style="margin-right: 20px">save</button>
+      </form>
+      <div class="error-msg">{{msg}}</div>
+    </div>
+    <div class="col-md-6 card">
+      <div *ngIf="imageView != null">
+        <div class="card-body">
+          <h5 class="card-title">{{ postForm.value.title }}</h5>
+          <h5 class="card-desc">{{ postForm.value.expirDate }}</h5>
+          <p class="card-text">{{ postForm.value.price | currency:'USD':true }}</p>
+          <h5 class="card-title">{{ postForm.value.category.name }}</h5>
+        </div>
+        <img class="img-responsive card-img" [src]="imageView" alt="{{ product.title }}">
+
+
+      </div>
+    </div>
+  </div>
+</div>

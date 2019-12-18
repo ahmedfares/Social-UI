@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from './auth/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ export class ApiService {
 
   ip = "http://localhost";
   baseUrl = this.ip + ":8080";
+  webSocketPath = this.baseUrl + '/gkz-stomp-endpoint';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private token: TokenStorageService) { }
 
   getPhotoUrl(url) {
     // if (url != null) {
@@ -116,8 +118,29 @@ export class ApiService {
     return this.http.post(this.baseUrl + '/user/DeleteFollowing/'+userEmail+'/'+followerEmail,body, {
       responseType: 'json' as 'json'
     });
+  }   
+  create(product){
+    //this.db.list('/products').push(product);
   }
 
+  savePost(post, images): Observable<any> {
+
+    const token = this.token.getToken();
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'text' as 'json', headers };
+    let body = new FormData();
+    let postObj ={body : post.title};
+    for (let image of images) {
+      body.append('images', image);
+    }
+    body.append("post", new Blob([JSON.stringify(postObj)],
+      {
+        type: "application/json"
+      }));
+    return this.http.post(this.baseUrl + '/post/add', body,options);
+  }
   enablePost(post): Observable<any> {
     let body = new FormData();
     return this.http.post(this.baseUrl + '/post/ignorePost?postId='+post.id,post.id, {

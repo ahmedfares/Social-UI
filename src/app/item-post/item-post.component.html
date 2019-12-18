@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{product.user.firstName}} {{product.user.lastName}}</mat-card-title>
+    <mat-card-title>{{product.user.name}}</mat-card-title>
     <mat-card-subtitle>{{product.createdDate.replace('T',' ')}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
@@ -9,7 +9,7 @@
       {{product.body}}
     </p>
   </mat-card-content>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image  [src]="product.imageURL" alt="Photo of a Shiba Inu">
   <div style="display: flex;justify-content: space-between;"> 
     <span >{{product.likes.length}} Likes</span>
     <span>{{product.comments.length}} Comments</span>
@@ -23,7 +23,7 @@
     <div style="text-align: left;background-color: #F2F3F5;border-radius: 5px;padding: 20px;" *ngFor="let comment of product.comments; let i = index" >
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{comment.user.firstName}} {{comment.user.lastName}}</mat-card-title>
+        <mat-card-title>{{comment.user.name}}</mat-card-title>
         <mat-card-subtitle>{{comment.user.createdDate.substring(0,10)}}</mat-card-subtitle>
       </mat-card-header>
       <span style="margin-left: 50px;">{{comment.body}}</span>

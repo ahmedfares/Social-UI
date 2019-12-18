@@ -13,6 +13,8 @@ export class ItemPostComponent implements OnInit {
     constructor(public apiService:ApiService, private token: TokenStorageService) { }
 
   ngOnInit() {
+    //this.product.imageURL ="anonymous.png";
+    this.product.imageURL = "../../assets/images/" +this.product.imageURL; 
     this.product.isLiked = this.product.likes.find(x=>x.user.email == this.token.getEmail()); 
   }
 

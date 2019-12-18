@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
-
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class HeaderComponent implements OnInit {
   appUser: any;
+  notification = "ahmed";
   isBlockedUser: boolean;
   user: any = {
   };
@@ -24,14 +26,31 @@ export class HeaderComponent implements OnInit {
   registerSubmitted= false;
   notifications=[];
   activePage;
-  
+  private stompClient = null;
+  disabled = true;
   info: any;
   constructor(
     private router: Router, private apiService: ApiService, private formBuilder: FormBuilder, private token: TokenStorageService) {
     this.loginShow = false;
   }
 
+  popup(msg){
+    this.notification = msg;
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+  }
+
   ngOnInit() {
+
+    var modal = document.getElementById("myModal");
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
     this.isBlockedUser = JSON.parse(this.token.getCurrentUser()).blocked;
     if (this.router.url == '/profile')
       this.activePage = 'profile';
@@ -47,6 +66,7 @@ export class HeaderComponent implements OnInit {
       this.activePage = 'home';
     this.createLoginForm();
     this.createRegister();
+    this.disconnect();
     this.checkUserExist();
 
     this.info = {
@@ -56,13 +76,16 @@ export class HeaderComponent implements OnInit {
     };
   }
 
-  
+  ngOnDestroy() {
+    this.disconnect();
+  }  
 
   checkUserExist(){
     if(localStorage.getItem('userData')){
         this.appUser = JSON.parse(localStorage.getItem('userData'));
         //this.getUserNotifications();
       }
+      this.userConnect();
   }
 
   createLoginForm() {
@@ -145,30 +168,46 @@ export class HeaderComponent implements OnInit {
   closeModal() {
     var modal = document.getElementById("loginModal");
     modal.style.display = "none";
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
   }
   toggle() {
     this.loginShow = !this.loginShow;
   }
-  // logout() { 
-  //   this.appUser = null; 
-  //   console.log('>>>> logout')
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('type');
-  //   localStorage.removeItem('name');
-  //   localStorage.removeItem('userDate');
-  //   this.router.navigate(['/login']);
-  //   //this.auth.logout();
-  // }
   logout() {
     this.token.signOut();
     window.location.reload();
   }
 
   getUserNotifications(){
-    // this.apiService.getUserNotifications().subscribe(data => {
-    //   console.log('>> user notifications: ',data);
-    //   this.notifications = data;
-    // });
+   }
+  disconnect() {
+    if (this.stompClient != null) {
+      this.stompClient.disconnect();
+    }
+    this.setConnected(false);
+  }
+
+  setConnected(connected: boolean) {
+    this.disabled = !connected;
+  }
+
+
+  userConnect() {
+    const socket = new SockJS(this.apiService.webSocketPath);
+    this.stompClient = Stomp.over(socket);
+    const _this = this;
+    this.stompClient.connect({}, function (frame) {
+      _this.setConnected(true);
+      //console.log('>>----- conect on: ', userId);
+      _this.stompClient.subscribe("/notifications", function (data) {
+        //let bids = JSON.parse(data.body);
+        //_this.notifications = bids;
+        //alert(data);
+        console.log(data.body);
+        _this.popup(data.body);
+      });
+    });
   }
 
 }
