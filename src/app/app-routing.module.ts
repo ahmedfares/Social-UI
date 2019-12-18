@@ -11,6 +11,7 @@ import { UsertimelineComponent } from './usertimeline/usertimeline.component';
 import { MalpostsComponent } from './malposts/malposts.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'newPost',
     component: AddProductComponent
+  },
+  {
+    path: 'post',
+    component: CreatePostComponent
   }
   
 ];

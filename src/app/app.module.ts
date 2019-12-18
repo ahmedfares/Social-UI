@@ -26,6 +26,7 @@ import { ClaimsComponent } from './claims/claims.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateAdvertisementComponent } from './create-advertisement/create-advertisement.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddProductComponent } from './add-product/add-product.component';
     ClaimsComponent,
     CreatePostComponent,
     CreateAdvertisementComponent,
+    AdvertisementComponent,
     
   ],
   imports: [
