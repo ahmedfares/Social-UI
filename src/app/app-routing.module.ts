@@ -25,7 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_READ_HOME'] }
   },
   {
     path: 'register',
@@ -39,11 +41,15 @@ const routes: Routes = [
   },
   {
     path: 'admin/manage-roles',
-    component: ManageRolesComponent
+    component: ManageRolesComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_MANAGE_ROLES']}
   },
   {
     path: 'followers',
-    component: FollowersComponent
+    component: FollowersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_FOLLOW_LIST']}
   },
   {
     path: 'userTimeLine/:email',
@@ -51,23 +57,33 @@ const routes: Routes = [
   },
   {
     path: 'malPosts',
-    component: MalpostsComponent
+    component: MalpostsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_MANAGE_MALICIOUS']}
   },
   {
     path: 'claims',
-    component: ClaimsComponent
+    component: ClaimsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_MANAGE_CLAIMS']}
   },
   {
     path: 'newPost',
-    component: AddProductComponent
+    component: AddProductComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_CREATE_POST']}
   },
   {
     path: 'post',
-    component: CreatePostComponent
+    component: CreatePostComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_CREATE_POST']}
   },
   {
     path:'adv',
-    component: AdvertisementComponent
+    component: AdvertisementComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['MANAGE_AD']}
   }
   
 ];
