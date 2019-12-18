@@ -1,3 +1,39 @@
-<p>
-  create-post works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 ">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Post</h5>
+          <form class="form-signin ">
+            
+            <div class="between"></div>
+            <div class="form-label-group">
+              <textarea class="form-control" name="PostText" [(ngModel)]="PostText" id="inputText"
+                rows="3"></textarea>
+            </div>
+            <div class="between"></div>
+            <div class="row" >
+                <div class="col-md-12">
+                  <input type="file" (change) = "onFileSelected($event)">
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-lg btn-outline-danger btn-block text-uppercase" (click)="print()"
+                  type="submit">Post</button>
+
+              </div>
+              <div class="col-md-4">
+              </div>
+
+            </div>
+            <hr class="my-4">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
