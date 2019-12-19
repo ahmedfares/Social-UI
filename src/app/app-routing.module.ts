@@ -80,6 +80,12 @@ const routes: Routes = [
     data: {roles: ['ROLE_CREATE_POST']}
   },
   {
+    path: 'profile',
+    component: UserComponent,
+    //canActivate: [AuthGuard],
+    //data: {roles: ['ROLE_CREATE_POST']}
+  },
+  {
     path:'adv',
     component: AdvertisementComponent,
     canActivate: [AuthGuard],

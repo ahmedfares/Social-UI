@@ -1,12 +1,11 @@
   
 <div class="container upperprofile">
-
+  <app-header></app-header>
   <p class="profiletext">Profile</p>
       <div class="row" >
   
         <div class="col-md-4 center" *ngIf="showUpdate">
-  
-                <img src="{{parent.user.imageURL}}" height="200" width="200">
+                <img [src]="user.imageURL" height="200" width="200">
   
         </div>
         <div class="col-md-4 center" *ngIf="!showUpdate">
@@ -23,10 +22,6 @@
                       <tr>
                         <td class="leftpart">Name :</td>
                         <td class="rightpart">{{user?.name}}</td>
-                      </tr>
-                      <tr>
-                        <td class="leftpart">City :</td>
-                        <td class="rightpart">{{user?.city}}</td>
                       </tr>
                       <tr>
                         <td class="leftpart">Email :</td>
@@ -47,7 +42,7 @@
             </div>
             <div *ngIf="!showUpdate" class="col-md-8 center edit">
   
-            <form class="form-edit-profile" (submit)="updateProfile(inputName.value,inputEmail.value,inputPassword.value)">
+            <form class="form-edit-profile" (submit)="updateProfile(inputName.value,inputEmail.value,inputCity.value)">
                 <table class="table table-borderless">
                     <tbody>
                       <tr>
@@ -58,13 +53,9 @@
                         <td class="leftpart">Email :</td>
                         <td class="rightpart"><input type="email" id="inputEmail" #inputEmail class="form-control" placeholder="Email Address" value="{{user.email}}" required autofocus></td>
                       </tr>
-                      <tr>
-                          <td class="leftpart">Password :</td>
-                          <td class="rightpart"><input type="password" id="inputPassword" #inputPassword class="form-control" placeholder="Password" value="{{user.password}}" required autofocus></td>
-                        </tr>
                         <tr>
                           <td class="leftpart">City :</td>
-                          <td class="rightpart"><input type="text" id="inputCity" #inputPassword class="form-control" placeholder="City" value="{{user.city}}" required autofocus></td>
+                          <td class="rightpart"><input type="text" id="inputCity" #inputCity class="form-control" placeholder="City" value="{{user.city}}" required autofocus></td>
                         </tr>
                     </tbody>
   

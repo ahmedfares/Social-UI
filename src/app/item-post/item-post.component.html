@@ -34,7 +34,7 @@
     <div style="text-align: left;border-radius: 5px;padding: 10px;" >
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>User Name</mat-card-title>
+        <mat-card-title>{{product.user.name}}</mat-card-title>
       </mat-card-header>
       <textarea class="form-control" #commentTxt placeholder="Enter your comment" rows="3" id="comment" style="background-color: #F2F3F5;width: 500px;margin-left:50px ;"></textarea>
       <button class="pull-right" style="margin: 10px;" mat-flat-button color="primary" (click)="addComment(commentTxt.value)" >Comment</button>

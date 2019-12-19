@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
 
   postForm: FormGroup;
   uploadedText = 'Choose file';
-  images;
+  images; 
   submitted = false;
   imageView;
   msg;

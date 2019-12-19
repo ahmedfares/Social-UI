@@ -20,7 +20,7 @@ export class CreatePostComponent implements OnInit {
     this.post.text = this.PostText;
     if(this.selectedFile != null)
       this.post.image = this.selectedFile;
-    this.getUser();
+    //this.getUser();
     this.Post();
   }
 
@@ -32,13 +32,12 @@ export class CreatePostComponent implements OnInit {
     this.postService.makePost(this.post).subscribe(
       data => {
         this.post = data;
+        this.router.navigate(['/home']);
       },
       error => {
         console.log('Error', error);
       }
     );
-    this.router.navigate(['/home']);
-    window.location.reload();
 
   }
   getUser(){

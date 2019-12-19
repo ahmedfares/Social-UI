@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-user',
@@ -12,56 +13,55 @@ export class UserComponent implements OnInit {
   showUpdate: boolean = true;
   selectedFile: any;
   user: any;
+  updatedUser;
+  images;
   update() {
     this.showUpdate = !this.showUpdate;
   }
 
-  updateProfile(name,email,password){
+  updateProfile(name,email,city){
     console.log('event : ',event)
     this.showUpdate = !this.showUpdate;
     this.user.name = name;
     this.user.email = email;
-    this.user.password = password;
-    if(this.selectedFile != null)
-      this.user.image = this.selectedFile;
+    this.user.city = city;
+    //if(this.selectedFile != null)
+      //this.user.image = this.selectedFile;
     this.updateUserData();
   }
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private token:TokenStorageService) { }
 
 
   ngOnInit() {
 
-    this.getUserData();
-
-
+    if(sessionStorage.getItem("updatedUser"))
+      {
+        this.user = JSON.parse(sessionStorage.getItem("updatedUser"));
+        this.user.imageURL = "../../assets/images/" + this.user.imageURL;
+      }
+    else
+      this.getUserData();
   }
 
   getUserData() {
-    this.userService.getUserData().subscribe(
-      data => {
-        console.log("POST Request is successful ", data);
-        this.user = data;
-        console.log(this.user.name);
-      },
-      error => {
-        console.log("Error", error);
-      }
-    );
+    this.user = JSON.parse(this.token.getCurrentUser());
   }
 
   onFileSelected(event){
-    this.selectedFile = event.target.files[0];
+    this.images = event.target.files;
+  }
+  reloadUser(imageURL){
+    //this.user.imageURL = (this.user.imageURL)?("../../assets/images/" + this.user.imageURL):"../../assets/images/anonymous.png" ; 
+    this.user.imageURL = "../../assets/images/" +imageURL;
+    console.log("../../assets/images/" +imageURL);
   }
   updateUserData() {
     console.log('update user data: ', this.user);
-    this.userService.updateUserData(this.user).subscribe(
+    this.userService.updateUserData(this.user,this.images).subscribe(
       data => {
-        console.log(' updateed User ', data);
-        this.user = data;
-      },
-      error => {
-        console.log('Error', error);
-      }
-    );
+        sessionStorage.setItem("updatedUser",data);
+        //this.token.saveCurrentUser(JSON.parse(data));
+this.reloadUser(JSON.parse(data).imageURL);
+      });
   }
 }
