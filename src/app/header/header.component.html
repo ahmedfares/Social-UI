@@ -8,11 +8,11 @@
     <span><a id="homeScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/home">Home</a></span>
     <span><a id="profileScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/profile">Profile</a></span>
     <span><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="/followers">followers</a></span>
-    <span><a [ngClass]="{ 'active': activePage == 'blocked' }" id="malPostsScreen"
+    <span *ngIf="authContains('ROLE_MANAGE_MALICIOUS')"><a [ngClass]="{ 'active': activePage == 'blocked' }" id="malPostsScreen"
         routerLink="/malPosts">MalPosts</a></span>
-    <span><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="../admin/manage-roles">Roles</a></span>
+    <span *ngIf="authContains('ROLE_MANAGE_ROLES')"><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="../admin/manage-roles">Roles</a></span>
     
-    <span><a [ngClass]="{ 'active': activePage == 'blocked' }" id="blockedScreen" routerLink="/claims">Claims</a></span>
+    <span *ngIf="authContains('ROLE_MANAGE_CLAIMS')"><a [ngClass]="{ 'active': activePage == 'blocked' }" id="blockedScreen" routerLink="/claims">Claims</a></span >
     <span><a [ngClass]="{ 'active': activePage == 'newPost' }" id="newPost" routerLink="/newPost">New Post</a></span>
     <span>
       <span *ngIf="info.email">
