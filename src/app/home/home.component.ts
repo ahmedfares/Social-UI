@@ -14,7 +14,10 @@ export class HomeComponent implements OnInit {
   isBlockedUser:boolean;
   AllPosts: any[] = [];
   claimTxt = "sdsa";
+  firstAd="";
+  secondAd="";
   pageNo = 0;
+  ads=[];
   constructor(public apiService:ApiService,private router: Router, private token: TokenStorageService) {
 
    }
@@ -31,6 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPosts();
+    this.getAds();
     this.isBlockedUser = JSON.parse(this.token.getCurrentUser()).blocked;
   }
 
@@ -50,6 +54,18 @@ export class HomeComponent implements OnInit {
     this.apiService.getAllPost(this.token.getEmail(),0).subscribe(data => {
       this.AllPosts= data;
     });
+  }
+  getAds(){
+    this.apiService.getAds().subscribe(data => {
+      this.loadAds(this.shuffle(data));
+    });
+  }
+  loadAds(ads){
+    this.firstAd = "../../assets/images/"+ ads[0].imageURL;
+    this.secondAd = "../../assets/images/"+ ads[1].imageURL;
+  }
+  shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
   }
 
   logout() {

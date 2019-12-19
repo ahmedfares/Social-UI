@@ -1,16 +1,11 @@
 <div *ngIf="!isBlockedUser"  class="container">
   <app-header></app-header>
-  <div style="justify-content: center;display: flex">
+  <div style="margin-left: 370px;">
       <input type="text" #searchTxt placeholder="Search" class="form-control searchField" (keyup)="enterSearchTxt($event,searchTxt.value)"/>
-
-    <!-- <mat-form-field class="example-full-width searchField">
-      <input matInput placeholder="Search" #searchTxt (keyup)="enterSearchTxt($event,searchTxt.value)">
-        
-    </mat-form-field> -->
   </div>
   
   <div class="row" style="background-color: #E9EBEE;">
-    <div class="col-md-3"><img src="../../assets/images/adver4.jpg" width="300px" height="500px" style="margin-top: 20px;position: fixed;;margin-top: 70px"/></div>
+    <div class="col-md-3"><img [src]="firstAd" width="300px" height="500px" style="margin-top: 20px;position: fixed;;margin-top: 70px"/></div>
     <div class="col-md-6" style="text-align: center;margin-top: 70px;">
       <div  *ngFor="let product of AllPosts; let i = index" style="margin-top: 20px;">
       <app-item-post [product]="product"></app-item-post>
@@ -18,7 +13,7 @@
     <button mat-button color="primary" (click)="loadMorePosts()" >Load More Posts</button>
 
   </div>
-  <div class="col-md-3"><img src="../../assets/images/adver5.jpg" width="300px" height="500px" style="position: fixed;margin-top: 70px;" /></div>
+  <div class="col-md-3"><img [src]="secondAd" width="300px" height="500px" style="position: fixed;margin-top: 70px;" /></div>
   </div>
 </div>
 <div *ngIf="isBlockedUser" style="background-color: burlywood;display: flex;justify-content: center;align-items: center;flex: 1;" class="container">

@@ -1,59 +1,55 @@
-<div class="container">
-    <div class="row">
-      <div class="col-sm-12 ">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Advertisement</h5>
-            <form class="form-signin ">
-              
-              <div class="between"></div>
-              <div class="form-label-group">
-                <textarea class="form-control" name="AdText" [(ngModel)]="AdText" id="inputText"
-                  rows="3"></textarea>
-              </div>
-              <div class="between"></div>
-              <div class="row" >
-                  <div class="col-md-12" style="text-align: center;">
-                    <input type="file" (change) = "onFileSelected($event)">
-                  </div>
-              </div>
-              <div class="between"></div>
-              <div class="row">
-                  <table class="table table-borderless">
-                      <tbody>
-                  <tr>
-                      <td class="leftpart">Targeted Address :</td>
-                      <td class="rightpart"><input type="text" name="inputAddress" id="inputAddress"  class="form-control" placeholder="Address"  required autofocus></td>
-                    </tr>
-                    <tr>
-                      <td class="leftpart">Min Age :</td>
-                      <td class="rightpart"><input type="text" name="minAge" id="minAge"  class="form-control" placeholder="Min Age" required autofocus></td>
-                    </tr>
-                    <tr>
-                        <td class="leftpart">Max Age :</td>
-                        <td class="rightpart"><input type="text" name="maxAge" id="maxAge"  class="form-control" placeholder="Max Age"  required autofocus></td>
-                      </tr>
-                      </tbody>
-                      </table>
-              </div>
-              <div class="between"></div>
-              <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                  <button class="btn btn-lg btn-outline-danger btn-block text-uppercase" (click)="print()"
-                    type="submit">Post</button>
-  
-                </div>
-                <div class="col-md-4">
-                </div>
-  
-              </div>
-              <hr class="my-4">
-  
-            </form>
+<app-header></app-header>
+<div class=" container" style="padding-top: 6%;">
+  <h3 style="text-align: center;color: #19497A;margin:30px">Add Advertisement</h3>
+
+  <div class="row">
+    <div class="col-md-6" *ngIf="postForm != null">
+      <form [formGroup]="postForm" (ngSubmit)="saveAd()">
+
+        <div class="form-group custom-file mb-3">
+          <input type="file" (change)="uploadFile($event)" formControlName="photos" class="custom-file-input"
+            id="customFile" name="filename" [ngClass]="{ 'is-invalid': submitted && postForm.controls.photos.errors }">
+          <div *ngIf="submitted && postForm.controls.photos.errors" class="error-msg">
+            <div *ngIf="postForm.controls.photos.errors.required">Name is required</div>
           </div>
+          <label class="custom-file-label" for="customFile">{{uploadedText}}</label>
         </div>
+
+        <div class="form-group">
+          <label for="targetAddress">Target City</label>
+          <input  name="targetAddress" formControlName="targetAddress" id="targetAddress" type="text" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.targetAddress.errors }">
+          <div *ngIf="submitted && postForm.controls.targetAddress.errors" class="error-msg">
+            <div *ngIf="postForm.controls.targetAddress.errors.required">City is required</div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="minAge">Min Age</label>
+          <input name="minAge" formControlName="minAge" id="minAge" type="text" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.minAge.errors }">
+          <div *ngIf="submitted && postForm.controls.minAge.errors" class="error-msg">
+            <div *ngIf="postForm.controls.minAge.errors.required">Min Age is required</div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="maxAge">Max Age</label>
+          <input name="maxAge" formControlName="maxAge" id="maxAge" type="text" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.maxAge.errors }">
+          <div *ngIf="submitted && postForm.controls.maxAge.errors" class="error-msg">
+            <div *ngIf="postForm.controls.maxAge.errors.required">Max Age is required</div>
+          </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary pull-right" style="margin-right: 20px">save</button>
+      </form>
+      <div class="error-msg">{{msg}}</div>
+    </div>
+    <div class="col-md-6 card">
+      <div *ngIf="imageView != null">
+        <img class="img-responsive card-img" [src]="imageView" alt="{{ product.title }}">
       </div>
     </div>
   </div>
+</div>

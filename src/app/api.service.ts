@@ -106,6 +106,11 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
+  getAds(): Observable<any> {
+    return this.http.get(this.baseUrl + '/ads/get/', {
+      responseType: 'json' as 'json'
+    });
+  }
   
   addNewFollower(userEmail,followerEmail): Observable<any> {
     let body = new FormData();
@@ -122,7 +127,24 @@ export class ApiService {
   create(product){
     //this.db.list('/products').push(product);
   }
+  
+  saveAdvertise(advertise, images): Observable<any> {
 
+    const token = this.token.getToken();
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'text' as 'json', headers };
+    let body = new FormData();
+    for (let image of images) {
+      body.append('images', image);
+    }
+    body.append("advertise", new Blob([JSON.stringify(advertise)],
+      {
+        type: "application/json"
+      }));
+    return this.http.post(this.baseUrl + '/ads/add', body,options);
+  }
   savePost(post, images): Observable<any> {
 
     const token = this.token.getToken();

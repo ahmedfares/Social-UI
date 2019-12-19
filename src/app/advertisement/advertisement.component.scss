@@ -1,39 +1,35 @@
-input{
-    border-radius: 0;
-    border: solid 2px #dd0031;
+body {
+    padding-top: 20px;
 }
+img{
+    align-self: center;
+    margin-top: 20px;
+  }
+  input[type=file]{
+  padding:10px;
+  background:#eee;}
 
-.form-control:focus{
-    border: solid 4px #dd0031;
+  .card{
+    margin-bottom: 30px;
 }
-.between{
-    margin:10px;
+.card-img { 
+    max-height: 280px;
+    max-width:  540px;
+  }
+.card-footer {
+    padding: 0;
+    background: #fff;
 }
-.forgot{
+.card-footer button {
+    cursor: pointer;
+  }
+  .card-desc {
+    font-size: 14px
+  }
+
+  .error-msg{
+    color: red;
     text-align: center;
+    padding: 3%;
     font-weight: bold;
-    color:grey;
-    font-size: 0.9em;
-}
-.btn{
-cursor: pointer;
-}
-.card{
-    border-color: #dd0031;
-}
-button{
-    margin: 2px;
-    border: solid 3px;
-    font-weight: bold;
-}
-.checkbox-inline{
-    margin: 2px;
-    border: solid 3px;
-    font-weight: bold;
-}
-.tags{
-    margin: 3px;
-    padding: 8px;
-    border-radius: 3px;
-    text-align: center;
-}
+  }

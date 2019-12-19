@@ -89,7 +89,7 @@ const routes: Routes = [
     path:'adv',
     component: AdvertisementComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['MANAGE_AD']}
+    data: {roles: ['ROLE_MANAGE_AD']}
   }
   
 ];

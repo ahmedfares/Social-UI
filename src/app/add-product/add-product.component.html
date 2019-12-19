@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class=" container" style="padding-top: 6%;">
+   <h3 style="text-align: center;color: #19497A;margin:30px">Create New Post</h3>
   <div class="row">
     <div class="col-md-6" *ngIf="postForm != null">
       <form [formGroup]="postForm" (ngSubmit)="savePost()">
@@ -8,7 +9,7 @@
           <input type="file" (change)="uploadFile($event)" formControlName="photos" class="custom-file-input"
             id="customFile" name="filename" [ngClass]="{ 'is-invalid': submitted && postForm.controls.photos.errors }">
           <div *ngIf="submitted && postForm.controls.photos.errors" class="error-msg">
-            <div *ngIf="postForm.controls.photos.errors.required">Name is required</div>
+            <div *ngIf="postForm.controls.photos.errors.required">photo is required</div>
           </div>
           <label class="custom-file-label" for="customFile">{{uploadedText}}</label>
         </div>
@@ -18,7 +19,7 @@
           <input name="title" formControlName="title" id="title" type="text" class="form-control" required
             [ngClass]="{ 'is-invalid': submitted && postForm.controls.title.errors }">
           <div *ngIf="submitted && postForm.controls.title.errors" class="error-msg">
-            <div *ngIf="postForm.controls.title.errors.required">Name is required</div>
+            <div *ngIf="postForm.controls.title.errors.required">Body is required</div>
           </div>
 
         </div>
