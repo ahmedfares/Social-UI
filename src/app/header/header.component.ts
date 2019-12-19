@@ -211,4 +211,7 @@ window.onclick = function(event) {
     });
   }
 
+  authContains(privilege: string): boolean{
+    return this.token.getAuthorities().indexOf(privilege) !== -1
+  }
 }

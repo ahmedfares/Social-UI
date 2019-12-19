@@ -1,25 +1,33 @@
 <mat-toolbar color="primary" class="navbar">
   <div><img src="./assets/images/smedia.png" width="50px" height="50px" /> S-Media
-    <span style="color: cyan;" *ngIf="info.email">
-      <a routerLink="/home" style="color: cyan;"> {{ info.user.name }} </a>
+    <span *ngIf="info.email">
+      <button mat-button [matMenuTriggerFor]="menu"> {{ info.user.name }} </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/profile">Profile</button>
+        <button mat-menu-item routerLink="/followers">Followers</button>
+        <button mat-menu-item routerLink="../admin/manage-roles" *ngIf="authContains('ROLE_MANAGE_ROLES')">Manage roles</button>
+        <button mat-menu-item routerLink="/malPosts" *ngIf="authContains('ROLE_MANAGE_MALICIOUS')">Manage malicious posts</button>
+        <button mat-menu-item routerLink="/claims" *ngIf="authContains('ROLE_MANAGE_CLAIMS')">Manage claims</button>
+        <button mat-menu-item (click)="logout()" *ngIf="info.email">logout</button>
+      </mat-menu>
     </span>
   </div>
   <div>
     
     <span><a id="homeScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/home">Home</a></span>
-    <span><a id="profileScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/profile">Profile</a></span>
-    <span><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="/followers">followers</a></span>
-    <span><a [ngClass]="{ 'active': activePage == 'blocked' }" id="malPostsScreen"
-        routerLink="/malPosts">MalPosts</a></span>
-    <span><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="../admin/manage-roles">Roles</a></span>
+    <!-- <span><a id="profileScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/profile">Profile</a></span>
+    <span><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="/followers">followers</a></span> -->
+    <!-- <span *ngIf="authContains('ROLE_MANAGE_MALICIOUS')"><a [ngClass]="{ 'active': activePage == 'blocked' }" id="malPostsScreen"
+        routerLink="/malPosts">MalPosts</a></span> -->
+    <!-- <span *ngIf="authContains('ROLE_MANAGE_ROLES')"><a [ngClass]="{ 'active': activePage == 'followers' }" routerLink="../admin/manage-roles">Roles</a></span> -->
     
-    <span><a [ngClass]="{ 'active': activePage == 'blocked' }" id="blockedScreen" routerLink="/claims">Claims</a></span>
+    <!-- <span *ngIf="authContains('ROLE_MANAGE_CLAIMS')"><a [ngClass]="{ 'active': activePage == 'blocked' }" id="blockedScreen" routerLink="/claims">Claims</a></span > -->
     <span><a [ngClass]="{ 'active': activePage == 'newPost' }" id="newPost" routerLink="/newPost">New Post</a></span>
     <span><a id="adsScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/adv">Ads</a></span>
     <span>
-      <span *ngIf="info.email">
+      <!-- <span *ngIf="info.email">
         <a href="#" (click)="logout()"> Logout </a>
-      </span>
+      </span> -->
 
       <span *ngIf="!info.email">
         <a href="#" routerLink="/login"> login </a>
